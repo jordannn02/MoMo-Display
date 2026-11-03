@@ -2,6 +2,16 @@
 
 macOS 選單列亮度控制 App，優先支援 Apple Silicon MacBook Pro 的內建 Liquid Retina XDR。只保留逐螢幕亮度、XDR 額外增亮與無法使用 DDC 時的軟體調暗。
 
+## 下載與安裝
+
+請至 [GitHub Releases](https://github.com/jordannn02/MoMo-Display/releases) 下載適用 Apple Silicon（arm64）的 DMG。正式 Release 安裝包採用 Developer ID 簽章與 Apple 公證；各版本的驗證結果、SHA-256 與對應原始碼在 Release 說明中列出。
+
+1. 開啟下載的 DMG，將 **MoMo Display.app** 拖到 **Applications**。
+2. 從 `/Applications/MoMo Display.app` 開啟 App，再點選選單列太陽圖示。
+3. 如需登入時啟動，安裝到上述位置後才開啟「登入時自動啟動」。不要直接從 DMG 啟用此選項。
+
+需要 macOS 14 或以上，僅提供 Apple Silicon 版本；這是建置目標，實機驗證範圍請見下文。簽章與公證驗證軟體來源及 Apple 發布檢查，不代表已驗證所有螢幕硬體。請勿使用略過 Gatekeeper 或移除隔離屬性的方式安裝。
+
 ## 使用
 
 建置後開啟 App，點選選單列太陽圖示即可操作。若要安裝，可將建置產生的 `MoMo Display.app` 複製到「應用程式」資料夾。
@@ -37,7 +47,7 @@ App 沒有網路連線、更新服務、帳號或追蹤功能，也不要求螢�
 open "build/MoMo Display.app"
 ```
 
-無需下載套件。使用 Swift、AppKit、SwiftUI、Metal 和 macOS Framework。硬體亮度使用 DisplayServices、CoreDisplay、IOAVService 等非公開 API，未來 macOS 更新仍可能需要調整。這是本機 ad-hoc 簽署版本，未做 Developer ID 簽署或 Apple 公證。
+無需下載套件。使用 Swift、AppKit、SwiftUI、Metal 和 macOS Framework。硬體亮度使用 DisplayServices、CoreDisplay、IOAVService 等非公開 API，未來 macOS 更新仍可能需要調整。直接執行 `./build.sh` 產生的是本機 ad-hoc 簽署版本，不會自動進行 Developer ID 簽署或 Apple 公證；正式 Release 使用另外的發行流程。
 
 `--diagnose` 是唯讀診斷。`--hardware-self-test` 與 `--effects-self-test` **會短暫改動螢幕**，只供開發者明確執行；請不要在主程式正在增亮時同時執行測試。`--window` 可將控制面板開成視窗；`--show` 顯示選單列面板；`--login-status` 只讀回登入項目狀態。
 
